@@ -26,7 +26,7 @@
         "SearchTerm": searchTerm,
         "Results": []
     };
-        //TODO: check the Content key exists or not
+        //TODO: use the replace function to replace the escape letter
     for(var k = 0; k<scannedTextObj.length; ++k){
         const scanText = scannedTextObj[k].Content
     
@@ -35,7 +35,6 @@
             
             for (var j = 0; j < tokens.length; ++j){
                     if(tokens[j] === searchTerm){
-                            console.log("tokens?")
                             result.Results.push({
                             "ISBN": scannedTextObj[k].ISBN,
                             "Page": scanText[i].Page,
@@ -47,8 +46,6 @@
             
         }
     }
-    console.log("Yes?")
-    console.log(JSON.stringify(result))
      
     return result; 
 }
