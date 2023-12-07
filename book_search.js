@@ -122,3 +122,21 @@ if (test2result.Results.length == 1) {
     console.log("Expected:", twentyLeaguesOut.Results.length);
     console.log("Received:", test2result.Results.length);
 }
+
+/** We could choose to check that we get the 0 number of results if it is no found. */
+const test3result = findSearchTermInBooks(" ", twentyLeaguesIn);
+if (test3result.Results.length === 0) {
+    console.log("PASS: Test 3");
+} else {
+    console.log(test3result)
+    console.log("FAIL: Test 3");
+    console.log("Expected:", 0);
+/** We could choose to check that we get the 0 number of results if it is no found. */
+const test3result = findSearchTermInBooks(" ", twentyLeaguesIn);
+if (test3result.Results.length === 0) {
+    console.log("PASS: Test 3");
+} else {
+    console.log(test3result)
+    console.log("FAIL: Test 3");
+    console.log("Expected:", 0);
+    console.log("Received:", test2result.Results.length);
