@@ -40,11 +40,24 @@
             //check breaking word
             const lastWord = tokens[tokens.length-1]
             const lastWordSize = tokens[tokens.length-1].length
-            if(j <= scanText.length -2&& lastWord.substring(lastWordSize-1) ==="-" && lastWord.length>1){
-                console.log(lastWord)
-                const lineNext = scanText[j].Text.replace(/[^\w\s\'\-]/g, '')
-                const tokensNext = line.split(/\s+/);
-                const tokensNext[0] = 
+            if(j <= scanText.length -2&&
+               lastWord.substring(lastWordSize-1) ==="-" &&
+               lastWord.length>1){
+                console.log("debug: " + lastWord)
+                const lineNext = scanText[j+1].Text.replace(/[^\w\s\'\-]/g, '')
+                const tokensNext = lineNext.split(/\s+/);
+                
+                const  nextFirst = tokensNext[0]
+
+                const concatWord = lastWord.substring(0,lastWordSize-1) + nextFirst
+                console.log("debug: " + concatWord)
+                if(concatWord === searchTerm){
+                    result.Results.push({
+                        "ISBN": scannedTextObj[i].ISBN,
+                        "Page": scanText[j].Page,
+                        "Line": scanText[j].Line
+                    })           
+                }  
             }
 
             
@@ -122,7 +135,7 @@ const twentyLeaguesOut = {
  * */
 
 /** We can check that, given a known input, we get a known output. */
-const test1result = findSearchTermInBooks("the", twentyLeaguesIn);
+const test1result = findSearchTermInBooks("darkness", twentyLeaguesIn);
 if (JSON.stringify(twentyLeaguesOut) === JSON.stringify(test1result)) {
     console.log("PASS: Test 1");
 } else {
