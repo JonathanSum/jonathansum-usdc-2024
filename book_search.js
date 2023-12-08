@@ -34,7 +34,7 @@
             const line = scanText[j].Text.replace(/[^\w\s\'\-]/g, '')
             const tokens = line.split(/\s+/);
             // console.log("debug started "+j)
-            console.log(tokens)
+            // console.log(tokens)
             // console.log("debug ended "+j)
 
             //check breaking word
@@ -43,14 +43,14 @@
             if(j <= scanText.length -2&&
                lastWord.substring(lastWordSize-1) ==="-" &&
                lastWord.length>1){
-                console.log("debug: " + lastWord)
+                // console.log("debug: " + lastWord)
                 const lineNext = scanText[j+1].Text.replace(/[^\w\s\'\-]/g, '')
                 const tokensNext = lineNext.split(/\s+/);
                 
                 const  nextFirst = tokensNext[0]
                 if(nextFirst.length >=1){
                 const concatWord = lastWord.substring(0,lastWordSize-1) + nextFirst
-                console.log("debug: " + concatWord)
+                // console.log("debug: " + concatWord)
                 if(concatWord === searchTerm){
                     result.Results.push({
                         "ISBN": scannedTextObj[i].ISBN,
@@ -66,7 +66,6 @@
             for (var k = 0; k < tokens.length; ++k){
 
                 if(tokens[k] === searchTerm){
-                    console.log("I am here.")
                     result.Results.push({
                         "ISBN": scannedTextObj[i].ISBN,
                         "Page": scanText[j].Page,
@@ -137,7 +136,7 @@ const twentyLeaguesOut = {
  * */
 
 /** We can check that, given a known input, we get a known output. */
-const test1result = findSearchTermInBooks("darkness", twentyLeaguesIn);
+const test1result = findSearchTermInBooks("the", twentyLeaguesIn);
 if (JSON.stringify(twentyLeaguesOut) === JSON.stringify(test1result)) {
     console.log("PASS: Test 1");
 } else {
@@ -146,23 +145,23 @@ if (JSON.stringify(twentyLeaguesOut) === JSON.stringify(test1result)) {
     console.log("Received:", test1result);
 }
 
-// /** We could choose to check that we get the right number of results. */
-// const test2result = findSearchTermInBooks("the", twentyLeaguesIn); 
-// if (test2result.Results.length == 1) {
-//     console.log("PASS: Test 2");
-// } else {
-//     console.log("FAIL: Test 2");
-//     console.log("Expected:", twentyLeaguesOut.Results.length);
-//     console.log("Received:", test2result.Results.length);
-// }
+/** We could choose to check that we get the right number of results. */
+const test2result = findSearchTermInBooks("the", twentyLeaguesIn); 
+if (test2result.Results.length == 1) {
+    console.log("PASS: Test 2");
+} else {
+    console.log("FAIL: Test 2");
+    console.log("Expected:", twentyLeaguesOut.Results.length);
+    console.log("Received:", test2result.Results.length);
+}
 
-// /** We could choose to check that we get the 0 number of results if it is no found. */
-// const test3result = findSearchTermInBooks(" ", twentyLeaguesIn);
-// if (test3result.Results.length === 0) {
-//     console.log("PASS: Test 3");
-// } else {
-//     console.log(test3result)
-//     console.log("FAIL: Test 3");
-//     console.log("Expected:", 0);
-// }
+/** We could choose to check that we get the 0 number of results if it is no found. */
+const test3result = findSearchTermInBooks(" ", twentyLeaguesIn);
+if (test3result.Results.length === 0) {
+    console.log("PASS: Test 3");
+} else {
+    console.log(test3result)
+    console.log("FAIL: Test 3");
+    console.log("Expected:", 0);
+}
 
