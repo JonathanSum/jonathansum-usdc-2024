@@ -48,7 +48,7 @@
                 const tokensNext = lineNext.split(/\s+/);
                 
                 const  nextFirst = tokensNext[0]
-
+                if(nextFirst.length >=1){
                 const concatWord = lastWord.substring(0,lastWordSize-1) + nextFirst
                 console.log("debug: " + concatWord)
                 if(concatWord === searchTerm){
@@ -57,7 +57,9 @@
                         "Page": scanText[j].Page,
                         "Line": scanText[j].Line
                     })           
-                }  
+                } 
+                }
+ 
             }
 
             
