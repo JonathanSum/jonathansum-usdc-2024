@@ -131,12 +131,14 @@ if (test3result.Results.length === 0) {
     console.log(test3result)
     console.log("FAIL: Test 3");
     console.log("Expected:", 0);
+}
 /** We could choose to check that we get the 0 number of results if it is no found. */
-const test3result = findSearchTermInBooks(" ", twentyLeaguesIn);
+const test4result = findSearchTermInBooks(" ", twentyLeaguesIn);
 if (test3result.Results.length === 0) {
-    console.log("PASS: Test 3");
+    console.log("PASS: Test 4");
 } else {
     console.log(test3result)
-    console.log("FAIL: Test 3");
+    console.log("FAIL: Test 4");
     console.log("Expected:", 0);
     console.log("Received:", test2result.Results.length);
+}
