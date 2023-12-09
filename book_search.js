@@ -281,6 +281,7 @@ if (test3result.Results.length === 0) {
     console.log("Expected:", 0);
 }
 
+//Test result for searching the term darkness
 const test4result = findSearchTermInBooks("darkness", twentyLeaguesIn);
 if (JSON.stringify(darknessOut) === JSON.stringify(test4result)) {
     console.log("PASS: Test 4");
@@ -290,7 +291,7 @@ if (JSON.stringify(darknessOut) === JSON.stringify(test4result)) {
     console.log("Received:", test4result);
 }
 
-
+//Test result for searching the term Canadian's
 const test5result = findSearchTermInBooks("Canadian's", twentyLeaguesIn);
 if (JSON.stringify(canadianOut) === JSON.stringify(test5result)) {
     console.log("PASS: Test 5");
@@ -300,6 +301,7 @@ if (JSON.stringify(canadianOut) === JSON.stringify(test5result)) {
     console.log("Received:", test5result);
 }
 
+//Test result for searching the term apple
 const test6result = findSearchTermInBooks("apple", twentyLeaguesInS);
 if (JSON.stringify(appleOut) === JSON.stringify(test6result)) {
     console.log("PASS: Test 6");
@@ -308,6 +310,8 @@ if (JSON.stringify(appleOut) === JSON.stringify(test6result)) {
     console.log("Expected:", appleOut);
     console.log("Received:", test6result);
 }
+
+//Test result for searching the term the in a document that has two books with the word the
 const test7result = findSearchTermInBooks("the", twentyLeaguesInS);
 if (JSON.stringify(moreThanOneOut) === JSON.stringify(test7result)) {
     console.log("PASS: Test 7");
@@ -317,6 +321,7 @@ if (JSON.stringify(moreThanOneOut) === JSON.stringify(test7result)) {
     console.log("Received:", test7result);
 }
 
+//Test result for searching the term good
 const test8result = findSearchTermInBooks("good", twentyLeaguesInS);
 if (JSON.stringify(goodOut) === JSON.stringify(test8result)) {
     console.log("PASS: Test 8");
@@ -325,6 +330,8 @@ if (JSON.stringify(goodOut) === JSON.stringify(test8result)) {
     console.log("Expected:", goodOut);
     console.log("Received:", test8result);
 }
+
+//Test result for searching the term upper case of The to test the casing requirements
 const test9result = findSearchTermInBooks("The", twentyLeaguesIn);
 if (JSON.stringify(upperThe) === JSON.stringify(test9result)) {
     console.log("PASS: Test 9");
