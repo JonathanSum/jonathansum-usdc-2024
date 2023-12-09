@@ -106,7 +106,50 @@ const twentyLeaguesIn = [
         ] 
     }
 ]
-    
+const twentyLeaguesInS = [
+    {
+        "Title": "Twenty Thousand Leagues Under the Sea",
+        "ISBN": "9780000528531",
+        "Content": [
+            {
+                "Page": 31,
+                "Line": 8,
+                "Text": "now simply went on by her own momentum.  The dark-"
+            },
+            {
+                "Page": 31,
+                "Line": 9,
+                "Text": "ness was then profound; and however good the Canadian\'s"
+            },
+            {
+                "Page": 31,
+                "Line": 10,
+                "Text": "eyes were, I asked myself how he had managed to see, and"
+            } 
+        ] 
+    },
+    {
+        "Title": "Apple Company",
+        "ISBN": "9780000528555",
+        "Content": [
+            {
+                "Page": 1,
+                "Line": 2,
+                "Text": "now simply went on by her own momentum.  The app-"
+            },
+            {
+                "Page": 1,
+                "Line": 3,
+                "Text": "le was then profound; and however good the Canadian\'s"
+            },
+            {
+                "Page": 1,
+                "Line": 4,
+                "Text": "eyes were, I asked myself how he had managed to see, and"
+            } 
+        ] 
+    }
+]  
 /** Example output object */
 const twentyLeaguesOut = {
     "SearchTerm": "the",
@@ -205,4 +248,19 @@ if (JSON.stringify(CanadianOut) === JSON.stringify(test5result)) {
     console.log("Received:", test5result);
 }
 
-
+const test6result = findSearchTermInBooks("apple", twentyLeaguesInS);
+if (JSON.stringify(CanadianOut) === JSON.stringify(test6result)) {
+    console.log("PASS: Test 6");
+} else {
+    console.log("FAIL: Test 6");
+    console.log("Expected:", CanadianOut);
+    console.log("Received:", test6result);
+}
+const test7result = findSearchTermInBooks("the", twentyLeaguesInS);
+if (JSON.stringify(CanadianOut) === JSON.stringify(test7result)) {
+    console.log("PASS: Test 6");
+} else {
+    console.log("FAIL: Test 6");
+    console.log("Expected:", CanadianOut);
+    console.log("Received:", test7result);
+}
