@@ -33,9 +33,7 @@
         for(var j = 0; j < scanText.length; ++j){
             const line = scanText[j].Text.replace(/[^\w\s\'\-]/g, '')
             const tokens = line.split(/\s+/);
-            // console.log("debug started "+j)
-            // console.log(tokens)
-            // console.log("debug ended "+j)
+  
 
             //check breaking word
             const lastWord = tokens[tokens.length-1]
@@ -43,14 +41,14 @@
             if(j <= scanText.length -2&&
                lastWord.substring(lastWordSize-1) ==="-" &&
                lastWord.length>1){
-                // console.log("debug: " + lastWord)
+
                 const lineNext = scanText[j+1].Text.replace(/[^\w\s\'\-]/g, '')
                 const tokensNext = lineNext.split(/\s+/);
                 
                 const  nextFirst = tokensNext[0]
                 if(nextFirst.length >=1){
                 const concatWord = lastWord.substring(0,lastWordSize-1) + nextFirst
-                // console.log("debug: " + concatWord)
+
                 if(concatWord === searchTerm){
                     result.Results.push({
                         "ISBN": scannedTextObj[i].ISBN,
@@ -145,7 +143,7 @@ const twentyLeaguesInS = [
             {
                 "Page": 1,
                 "Line": 4,
-                "Text": "eyes were, I asked myself how he had managed to see, and"
+                "Text": "eyes were, I asked myself how he had good to see, and"
             } 
         ] 
     }
@@ -172,7 +170,7 @@ const darknessOut = {
         }
     ]
 }
-const CanadianOut = {
+const canadianOut = {
     "SearchTerm": "Canadian\'s",
     "Results": [
         {
@@ -182,7 +180,61 @@ const CanadianOut = {
         }
     ]
 }
-    
+const appleOut = {
+    "SearchTerm": "apple",
+    "Results": [
+        {
+            "ISBN": "9780000528555",
+            "Page": 1,
+            "Line": 2
+        }
+    ]
+}
+const moreThanOneOut = {
+    "SearchTerm": "the",
+    "Results": [
+        {
+            "ISBN": "9780000528531",
+            "Page": 31,
+            "Line": 9
+        },
+        {
+            "ISBN": "9780000528555",
+            "Page": 1,
+            "Line": 3
+        }
+    ]
+}
+const goodOut = {
+    "SearchTerm": "good",
+    "Results": [
+        {
+            "ISBN": "9780000528531",
+            "Page": 31,
+            "Line": 9
+        },
+        {
+            "ISBN": "9780000528555",
+            "Page": 1,
+            "Line": 3
+        },
+        {
+            "ISBN": "9780000528555",
+            "Page": 1,
+            "Line": 4
+        },
+    ]
+}
+const upperThe = {
+    "SearchTerm": "The",
+    "Results": [
+        {
+            "ISBN": "9780000528531",
+            "Page": 31,
+            "Line": 8
+        }
+    ]
+}    
 /*
  _   _ _   _ ___ _____   _____ _____ ____ _____ ____  
 | | | | \ | |_ _|_   _| |_   _| ____/ ___|_   _/ ___| 
@@ -240,27 +292,44 @@ if (JSON.stringify(darknessOut) === JSON.stringify(test4result)) {
 
 
 const test5result = findSearchTermInBooks("Canadian's", twentyLeaguesIn);
-if (JSON.stringify(CanadianOut) === JSON.stringify(test5result)) {
+if (JSON.stringify(canadianOut) === JSON.stringify(test5result)) {
     console.log("PASS: Test 5");
 } else {
     console.log("FAIL: Test 5");
-    console.log("Expected:", CanadianOut);
+    console.log("Expected:", canadianOut);
     console.log("Received:", test5result);
 }
 
 const test6result = findSearchTermInBooks("apple", twentyLeaguesInS);
-if (JSON.stringify(CanadianOut) === JSON.stringify(test6result)) {
+if (JSON.stringify(appleOut) === JSON.stringify(test6result)) {
     console.log("PASS: Test 6");
 } else {
     console.log("FAIL: Test 6");
-    console.log("Expected:", CanadianOut);
+    console.log("Expected:", appleOut);
     console.log("Received:", test6result);
 }
 const test7result = findSearchTermInBooks("the", twentyLeaguesInS);
-if (JSON.stringify(CanadianOut) === JSON.stringify(test7result)) {
-    console.log("PASS: Test 6");
+if (JSON.stringify(moreThanOneOut) === JSON.stringify(test7result)) {
+    console.log("PASS: Test 7");
 } else {
-    console.log("FAIL: Test 6");
-    console.log("Expected:", CanadianOut);
+    console.log("FAIL: Test 7");
+    console.log("Expected:", moreThanOneOut);
     console.log("Received:", test7result);
+}
+
+const test8result = findSearchTermInBooks("good", twentyLeaguesInS);
+if (JSON.stringify(goodOut) === JSON.stringify(test8result)) {
+    console.log("PASS: Test 8");
+} else {
+    console.log("FAIL: Test 8");
+    console.log("Expected:", goodOut);
+    console.log("Received:", test8result);
+}
+const test9result = findSearchTermInBooks("The", twentyLeaguesIn);
+if (JSON.stringify(upperThe) === JSON.stringify(test9result)) {
+    console.log("PASS: Test 9");
+} else {
+    console.log("FAIL: Test 9");
+    console.log("Expected:", upperThe);
+    console.log("Received:", test9result);
 }
