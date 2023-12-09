@@ -119,6 +119,27 @@ const twentyLeaguesOut = {
     ]
 }
 
+const darknessOut = {
+    "SearchTerm": "darkness",
+    "Results": [
+        {
+            "ISBN": "9780000528531",
+            "Page": 31,
+            "Line": 8
+        }
+    ]
+}
+const CanadianOut = {
+    "SearchTerm": "Canadian\'s",
+    "Results": [
+        {
+            "ISBN": "9780000528531",
+            "Page": 31,
+            "Line": 9
+        }
+    ]
+}
+    
 /*
  _   _ _   _ ___ _____   _____ _____ ____ _____ ____  
 | | | | \ | |_ _|_   _| |_   _| ____/ ___|_   _/ ___| 
@@ -164,4 +185,24 @@ if (test3result.Results.length === 0) {
     console.log("FAIL: Test 3");
     console.log("Expected:", 0);
 }
+
+const test4result = findSearchTermInBooks("darkness", twentyLeaguesIn);
+if (JSON.stringify(darknessOut) === JSON.stringify(test4result)) {
+    console.log("PASS: Test 4");
+} else {
+    console.log("FAIL: Test 4");
+    console.log("Expected:", darknessOut);
+    console.log("Received:", test4result);
+}
+
+
+const test5result = findSearchTermInBooks("Canadian's", twentyLeaguesIn);
+if (JSON.stringify(CanadianOut) === JSON.stringify(test5result)) {
+    console.log("PASS: Test 5");
+} else {
+    console.log("FAIL: Test 5");
+    console.log("Expected:", CanadianOut);
+    console.log("Received:", test5result);
+}
+
 
