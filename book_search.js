@@ -17,8 +17,8 @@
  * @param {string} searchTerm - The word or term we're searching for. 
  * @param {JSON} scannedTextObj - A JSON object representing the scanned text.
  * @returns {JSON} - Search results.
- * */ 
- function findSearchTermInBooks(searchTerm, scannedTextObj) {
+ * */
+function findSearchTermInBooks(searchTerm, scannedTextObj) {
     /** You will need to implement your search and 
      * return the appropriate object here. */
 
@@ -26,67 +26,85 @@
         "SearchTerm": searchTerm,
         "Results": []
     };
-        //TODO: use the replace function to replace the escape letter
-    for(var i = 0; i<scannedTextObj.length; ++i){
+    //TODO: use the replace function to replace the escape letter
+    for (var i = 0; i < scannedTextObj.length; ++i) {
         const scanText = scannedTextObj[i].Content
-        
-        for(var j = 0; j < scanText.length; ++j){
+
+        for (var j = 0; j < scanText.length; ++j) {
             const line = scanText[j].Text.replace(/[^\w\s\'\-]/g, '')
             const tokens = line.split(/\s+/);
-  
+
 
             //check breaking word
-            const lastWord = tokens[tokens.length-1]
-            const lastWordSize = tokens[tokens.length-1].length
-            if(j <= scanText.length -2&&
-               lastWord.substring(lastWordSize-1) ==="-" &&
-               lastWord.length>1){
+            const lastWord = tokens[tokens.length - 1]
+            const lastWordSize = tokens[tokens.length - 1].length
+            if (j <= scanText.length - 2 &&
+                lastWord.substring(lastWordSize - 1) === "-" &&
+                lastWord.length > 1) {
 
-                const lineNext = scanText[j+1].Text.replace(/[^\w\s\'\-]/g, '')
+                const lineNext = scanText[j + 1].Text.replace(/[^\w\s\'\-]/g, '')
                 const tokensNext = lineNext.split(/\s+/);
-                
-                const  nextFirst = tokensNext[0]
-                if(nextFirst.length >=1){
-                const concatWord = lastWord.substring(0,lastWordSize-1) + nextFirst
 
-                if(concatWord === searchTerm){
-                    result.Results.push({
-                        "ISBN": scannedTextObj[i].ISBN,
-                        "Page": scanText[j].Page,
-                        "Line": scanText[j].Line
-                    })           
-                } 
+                const nextFirst = tokensNext[0]
+                if (nextFirst.length >= 1) {
+                    const concatWord = lastWord.substring(0, lastWordSize - 1) + nextFirst
+
+                    if (concatWord === searchTerm) {
+                        result.Results.push({
+                            "ISBN": scannedTextObj[i].ISBN,
+                            "Page": scanText[j].Page,
+                            "Line": scanText[j].Line
+                        })
+                    }
                 }
- 
+
             }
 
-            
-            for (var k = 0; k < tokens.length; ++k){
+            // After checking the break word, we can start to search the searchTerm that matches any words in any lines.
+            for (var k = 0; k < tokens.length; ++k) {
 
-                if(tokens[k] === searchTerm){
+                if (tokens[k] === searchTerm) {
                     result.Results.push({
                         "ISBN": scannedTextObj[i].ISBN,
                         "Page": scanText[j].Page,
                         "Line": scanText[j].Line
-                    })           
-                }    
+                    })
+                }
             }
-    
-            
+
+
         }
     }
 
-     
-    return result; 
+
+    return result;
 }
 
 /** Example input object. */
-const twentyLeaguesIn = [
-    {
+const twentyLeaguesIn = [{
+    "Title": "Twenty Thousand Leagues Under the Sea",
+    "ISBN": "9780000528531",
+    "Content": [{
+            "Page": 31,
+            "Line": 8,
+            "Text": "now simply went on by her own momentum.  The dark-"
+        },
+        {
+            "Page": 31,
+            "Line": 9,
+            "Text": "ness was then profound; and however good the Canadian\'s"
+        },
+        {
+            "Page": 31,
+            "Line": 10,
+            "Text": "eyes were, I asked myself how he had managed to see, and"
+        }
+    ]
+}]
+const twentyLeaguesInS = [{
         "Title": "Twenty Thousand Leagues Under the Sea",
         "ISBN": "9780000528531",
-        "Content": [
-            {
+        "Content": [{
                 "Page": 31,
                 "Line": 8,
                 "Text": "now simply went on by her own momentum.  The dark-"
@@ -100,37 +118,13 @@ const twentyLeaguesIn = [
                 "Page": 31,
                 "Line": 10,
                 "Text": "eyes were, I asked myself how he had managed to see, and"
-            } 
-        ] 
-    }
-]
-const twentyLeaguesInS = [
-    {
-        "Title": "Twenty Thousand Leagues Under the Sea",
-        "ISBN": "9780000528531",
-        "Content": [
-            {
-                "Page": 31,
-                "Line": 8,
-                "Text": "now simply went on by her own momentum.  The dark-"
-            },
-            {
-                "Page": 31,
-                "Line": 9,
-                "Text": "ness was then profound; and however good the Canadian\'s"
-            },
-            {
-                "Page": 31,
-                "Line": 10,
-                "Text": "eyes were, I asked myself how he had managed to see, and"
-            } 
-        ] 
+            }
+        ]
     },
     {
         "Title": "Apple Company",
         "ISBN": "9780000528555",
-        "Content": [
-            {
+        "Content": [{
                 "Page": 1,
                 "Line": 2,
                 "Text": "now simply went on by her own momentum.  The app-"
@@ -144,56 +138,47 @@ const twentyLeaguesInS = [
                 "Page": 1,
                 "Line": 4,
                 "Text": "eyes were, I asked myself how he had good to see, and"
-            } 
-        ] 
+            }
+        ]
     }
-]  
+]
 /** Example output object */
 const twentyLeaguesOut = {
     "SearchTerm": "the",
-    "Results": [
-        {
-            "ISBN": "9780000528531",
-            "Page": 31,
-            "Line": 9
-        }
-    ]
+    "Results": [{
+        "ISBN": "9780000528531",
+        "Page": 31,
+        "Line": 9
+    }]
 }
 
 const darknessOut = {
     "SearchTerm": "darkness",
-    "Results": [
-        {
-            "ISBN": "9780000528531",
-            "Page": 31,
-            "Line": 8
-        }
-    ]
+    "Results": [{
+        "ISBN": "9780000528531",
+        "Page": 31,
+        "Line": 8
+    }]
 }
 const canadianOut = {
     "SearchTerm": "Canadian\'s",
-    "Results": [
-        {
-            "ISBN": "9780000528531",
-            "Page": 31,
-            "Line": 9
-        }
-    ]
+    "Results": [{
+        "ISBN": "9780000528531",
+        "Page": 31,
+        "Line": 9
+    }]
 }
 const appleOut = {
     "SearchTerm": "apple",
-    "Results": [
-        {
-            "ISBN": "9780000528555",
-            "Page": 1,
-            "Line": 2
-        }
-    ]
+    "Results": [{
+        "ISBN": "9780000528555",
+        "Page": 1,
+        "Line": 2
+    }]
 }
 const moreThanOneOut = {
     "SearchTerm": "the",
-    "Results": [
-        {
+    "Results": [{
             "ISBN": "9780000528531",
             "Page": 31,
             "Line": 9
@@ -207,8 +192,7 @@ const moreThanOneOut = {
 }
 const goodOut = {
     "SearchTerm": "good",
-    "Results": [
-        {
+    "Results": [{
             "ISBN": "9780000528531",
             "Page": 31,
             "Line": 9
@@ -227,14 +211,12 @@ const goodOut = {
 }
 const upperThe = {
     "SearchTerm": "The",
-    "Results": [
-        {
-            "ISBN": "9780000528531",
-            "Page": 31,
-            "Line": 8
-        }
-    ]
-}    
+    "Results": [{
+        "ISBN": "9780000528531",
+        "Page": 31,
+        "Line": 8
+    }]
+}
 /*
  _   _ _   _ ___ _____   _____ _____ ____ _____ ____  
 | | | | \ | |_ _|_   _| |_   _| ____/ ___|_   _/ ___| 
@@ -262,7 +244,7 @@ if (JSON.stringify(twentyLeaguesOut) === JSON.stringify(test1result)) {
 }
 
 /** We could choose to check that we get the right number of results. */
-const test2result = findSearchTermInBooks("the", twentyLeaguesIn); 
+const test2result = findSearchTermInBooks("the", twentyLeaguesIn);
 if (test2result.Results.length == 1) {
     console.log("PASS: Test 2");
 } else {
